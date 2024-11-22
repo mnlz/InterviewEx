@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.interviewex.dao.InterviewDao">
+    <resultMap id="InterviewResultMap" type="com.edu.interviewex.entity.Interview">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="edit_time" property="editTime"/>
+        <result column="read" property="read"/>
+        <result column="post" property="post"/>
+        <result column="company" property="company"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <!-- 基础查询条件 -->
+    <sql id="companySearchCondition">
+        <where>
+            <if test="keywords != null and keywords.size() > 0">
+                <foreach collection="keywords" item="keyword" separator="OR">
+                    company LIKE CONCAT('%', #{keyword}, '%')
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="com.edu.interviewex.entity.Interview" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO niuke (title, content, edit_time, `read`, post, company, status)
+        VALUES (#{title}, #{content}, #{editTime}, #{read}, #{post}, #{company}, #{status})
+    </insert>
+
+    <select id="selectAll" resultMap="InterviewResultMap">
+        SELECT * FROM niuke ORDER BY edit_time DESC
+    </select>
+
+    <select id="selectById" parameterType="long" resultMap="InterviewResultMap">
+        SELECT * FROM niuke WHERE id = #{id}
+    </select>
+
+    <!-- 统计符合条件的记录总数 -->
+    <select id="countByCompany" resultType="int">
+        SELECT COUNT(*) FROM niuke
+        <include refid="companySearchCondition"/>
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="searchByCompanyWithPage" resultMap="InterviewResultMap">
+        SELECT * FROM niuke
+        <include refid="companySearchCondition"/>
+        ORDER BY edit_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+
+    <update id="update" parameterType="com.edu.interviewex.entity.Interview">
+        UPDATE niuke
+        SET title = #{title}, content = #{content}, edit_time = #{editTime},
+            `read` = #{read}, post = #{post}, company = #{company}, status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM niuke WHERE id = #{id}
+    </delete>
+</mapper>

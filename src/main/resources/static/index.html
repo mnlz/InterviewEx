@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面试题管理系统</title>
+    <!-- 引入Element Plus样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <style>
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .search-box {
+            margin-bottom: 20px;
+        }
+        .table-content {
+            margin-top: 20px;
+        }
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .el-table .cell {
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h2>面试题列表</h2>
+            <!-- 搜索框 -->
+            <div class="search-box">
+                <el-input
+                    v-model="searchCompany"
+                    placeholder="请输入公司名称进行搜索（多个关键字用逗号分隔）"
+                    clearable
+                    @clear="handleSearch"
+                    style="width: 400px;">
+                    <template #append>
+                        <el-button @click="handleSearch">搜索</el-button>
+                    </template>
+                </el-input>
+            </div>
+
+            <!-- 数据表格 -->
+            <el-table
+                :data="tableData"
+                border
+                style="width: 100%"
+                v-loading="loading">
+                <el-table-column
+                    prop="title"
+                    label="标题"
+                    min-width="150">
+                </el-table-column>
+                <el-table-column
+                    prop="content"
+                    label="内容"
+                    min-width="300"
+                    show-overflow-tooltip>
+                </el-table-column>
+                <el-table-column
+                    prop="post"
+                    label="职位"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    prop="company"
+                    label="公司"
+                    min-width="120">
+                </el-table-column>
+                <el-table-column
+                    prop="editTime"
+                    label="更新时间"
+                    min-width="180"
+                    :formatter="formatDate">
+                </el-table-column>
+            </el-table>
+
+            <!-- 分页 -->
+            <div class="pagination">
+                <el-pagination
+                    v-model:current-page="currentPage"
+                    v-model:page-size="pageSize"
+                    :page-sizes="[10, 20, 50, 100]"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total"
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange">
+                </el-pagination>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入Vue和Element Plus -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/interview.js"></script>
+</body>
+</html>
