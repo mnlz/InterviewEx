@@ -8,6 +8,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * 面试题控制器
  */
@@ -67,12 +71,18 @@ public class InterviewController {
 
     /**
      * 搜索面试题（支持分页和公司名称模糊搜索）
+     * 支持多个公司名称或简称，用逗号分隔
      */
     @GetMapping("/search")
     public ResponseEntity<Page<Interview>> searchByCompany(
-            @RequestParam(required = false) String company,
+            @RequestParam(value = "companyNames", required = false) String companyNames,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
-        return ResponseEntity.ok(interviewService.searchByCompany(company, PageRequest.of(page, size)));
+        List<String> companyList = companyNames != null ? 
+            Arrays.asList(companyNames.split(",")) : 
+            Collections.emptyList();
+        return ResponseEntity.ok(interviewService.searchByCompany(
+            companyList.isEmpty() ? null : String.join(",", companyList), 
+            PageRequest.of(page, size)));
     }
 }

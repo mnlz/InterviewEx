@@ -25,6 +25,18 @@
         .el-table .cell {
             white-space: pre-line;
         }
+        .detail-content {
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        .detail-label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #606266;
+        }
+        .detail-row {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -50,7 +62,8 @@
                 :data="tableData"
                 border
                 style="width: 100%"
-                v-loading="loading">
+                v-loading="loading"
+                @row-click="handleRowClick">
                 <el-table-column
                     prop="title"
                     label="标题"
@@ -92,6 +105,41 @@
                     @current-change="handleCurrentChange">
                 </el-pagination>
             </div>
+
+            <!-- 详情对话框 -->
+            <el-dialog
+                v-model="detailVisible"
+                title="面试题详情"
+                width="60%"
+                :close-on-click-modal="false">
+                <div class="detail-content" v-if="currentInterview">
+                    <div class="detail-row">
+                        <span class="detail-label">标题：</span>
+                        <span>{{ currentInterview.title }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">公司：</span>
+                        <span>{{ currentInterview.company }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">职位：</span>
+                        <span>{{ currentInterview.post }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">更新时间：</span>
+                        <span>{{ formatDetailDate(currentInterview.editTime) }}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">内容：</span>
+                        <div style="white-space: pre-line; margin-top: 10px;">{{ currentInterview.content }}</div>
+                    </div>
+                </div>
+                <template #footer>
+                    <span class="dialog-footer">
+                        <el-button @click="detailVisible = false">关闭</el-button>
+                    </span>
+                </template>
+            </el-dialog>
         </div>
     </div>
 

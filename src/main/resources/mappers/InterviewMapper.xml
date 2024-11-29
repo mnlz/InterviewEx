@@ -16,9 +16,11 @@
     <sql id="companySearchCondition">
         <where>
             <if test="keywords != null and keywords.size() > 0">
-                <foreach collection="keywords" item="keyword" separator="OR">
+                AND (
+                <foreach collection="keywords" item="keyword" separator=" OR ">
                     company LIKE CONCAT('%', #{keyword}, '%')
                 </foreach>
+                )
             </if>
         </where>
     </sql>
@@ -49,7 +51,6 @@
         ORDER BY edit_time DESC
         LIMIT #{offset}, #{limit}
     </select>
-
 
     <update id="update" parameterType="com.edu.interviewex.entity.Interview">
         UPDATE niuke

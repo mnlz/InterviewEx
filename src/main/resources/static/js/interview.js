@@ -9,13 +9,15 @@ const app = createApp({
         const currentPage = ref(1);
         const pageSize = ref(20);
         const total = ref(0);
+        const detailVisible = ref(false);
+        const currentInterview = ref(null);
 
         // 获取面试题列表
         const fetchInterviews = async () => {
             loading.value = true;
             try {
                 const params = {
-                    page: currentPage.value,
+                    page: currentPage.value - 1, // 后端页码从0开始
                     size: pageSize.value
                 };
                 if (searchCompany.value) {
@@ -51,10 +53,22 @@ const app = createApp({
             fetchInterviews();
         };
 
-        // 日期格式化
+        // 表格行点击处理
+        const handleRowClick = (row) => {
+            currentInterview.value = row;
+            detailVisible.value = true;
+        };
+
+        // 日期格式化（表格中使用）
         const formatDate = (row, column, cellValue) => {
             if (!cellValue) return '';
-            const date = new Date(cellValue);
+            return formatDetailDate(cellValue);
+        };
+
+        // 日期格式化（详情中使用）
+        const formatDetailDate = (dateStr) => {
+            if (!dateStr) return '';
+            const date = new Date(dateStr);
             return date.toLocaleString('zh-CN', {
                 year: 'numeric',
                 month: '2-digit',
@@ -77,10 +91,14 @@ const app = createApp({
             currentPage,
             pageSize,
             total,
+            detailVisible,
+            currentInterview,
             handleSearch,
             handleCurrentChange,
             handleSizeChange,
-            formatDate
+            handleRowClick,
+            formatDate,
+            formatDetailDate
         };
     }
 });
