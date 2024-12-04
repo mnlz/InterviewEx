@@ -41,4 +41,12 @@ public interface InterviewDao {
      * @return total count of matching interviews
      */
     int countByCompany(@Param("keywords") List<String> keywords);
+
+    /**
+     * 高级搜索：支持标题和公司名称搜索
+     * @param title 标题关键字
+     * @param company 公司关键字
+     * @return 匹配的面试题列表
+     */
+    List<Interview> advancedSearch(@Param("title") String title, @Param("company") String company);
 }

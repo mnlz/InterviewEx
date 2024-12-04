@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -84,5 +83,17 @@ public class InterviewController {
         return ResponseEntity.ok(interviewService.searchByCompany(
             companyList.isEmpty() ? null : String.join(",", companyList), 
             PageRequest.of(page, size)));
+    }
+
+    /**
+     * 高级搜索接口：支持标题和公司名称搜索
+     */
+    @GetMapping("/advanced-search")
+    public ResponseEntity<Page<Interview>> advancedSearch(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String company,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
+        return ResponseEntity.ok(interviewService.advancedSearch(title, company, PageRequest.of(page, size)));
     }
 }

@@ -74,4 +74,21 @@ public class InterviewServiceImpl implements InterviewService {
         // 返回分页结果
         return new PageImpl<>(interviews, pageable, total);
     }
+
+    @Override
+    public Page<Interview> advancedSearch(String title, String company, Pageable pageable) {
+        // 调用DAO层的高级搜索方法
+        List<Interview> interviews = interviewDao.advancedSearch(title, company);
+        
+        // 手动进行分页
+        int start = (int) pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), interviews.size());
+        
+        // 返回分页结果
+        return new PageImpl<>
+            (interviews.subList(start, end),
+            pageable,
+            interviews.size()
+            );
+    }
 }

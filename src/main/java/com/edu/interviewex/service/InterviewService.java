@@ -50,4 +50,13 @@ public interface InterviewService {
      * @return 分页后的面试题列表
      */
     Page<Interview> searchByCompany(String companyKeyword, Pageable pageable);
+
+    /**
+     * 高级搜索：支持标题和公司名称搜索（分页）
+     * @param title 标题关键字
+     * @param company 公司关键字
+     * @param pageable 分页参数
+     * @return 分页后的面试题列表
+     */
+    Page<Interview> advancedSearch(String title, String company, Pageable pageable);
 }

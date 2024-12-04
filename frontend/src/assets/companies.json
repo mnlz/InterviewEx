@@ -1,0 +1,43 @@
+{
+  "bigCompanies": [
+    { "value": "阿里巴巴", "label": "阿里巴巴", "aliases": ["阿里", "淘宝", "天猫", "蚂蚁"], "englishName": "Alibaba Group", "subsidiaries": ["淘宝", "天猫", "支付宝"] },
+    { "value": "腾讯", "label": "腾讯", "aliases": ["鹅厂", "WX", "微信"], "englishName": "Tencent Holdings", "subsidiaries": ["微信", "QQ", "腾讯游戏"] },
+    { "value": "百度", "label": "百度", "aliases": ["度娘", "文心"], "englishName": "Baidu, Inc.", "subsidiaries": ["百度地图", "百度云"] },
+    { "value": "字节跳动", "label": "字节跳动", "aliases": ["字节", "抖音", "今日头条", "TikTok"], "englishName": "ByteDance", "subsidiaries": ["抖音", "今日头条", "TikTok"] },
+    { "value": "美团", "label": "美团", "aliases": ["美团点评", "大众点评"], "englishName": "Meituan", "subsidiaries": ["美团外卖", "美团酒店"] },
+    { "value": "京东", "label": "京东", "aliases": ["JD", "京东科技"], "englishName": "JD.com, Inc.", "subsidiaries": ["京东物流", "京东金融"] },
+    { "value": "华为", "label": "华为", "aliases": ["HW", "华为终端", "华为云"], "englishName": "Huawei Technologies Co., Ltd.", "subsidiaries": ["华为终端", "华为云"] },
+    { "value": "小米", "label": "小米", "aliases": ["米家", "MIUI"], "englishName": "Xiaomi Inc.", "subsidiaries": ["小米手机", "小米生态链"] },
+    { "value": "拼多多", "label": "拼多多", "aliases": ["PDD", "拼夕夕"], "englishName": "Pinduoduo Inc.", "subsidiaries": ["拼多多", "拼夕夕"] }
+  ],
+  "mediumCompanies": [
+    { "value": "滴滴", "label": "滴滴", "aliases": ["滴滴出行", "DiDi"], "englishName": "DiDi Chuxing", "subsidiaries": ["滴滴出行", "滴滴金融"] },
+    { "value": "快手", "label": "快手", "aliases": ["快手科技", "KS"], "englishName": "Kwai Inc.", "subsidiaries": ["快手", "快手直播"] },
+    { "value": "网易", "label": "网易", "aliases": ["网易有道", "网易云音乐", "163"], "englishName": "NetEase, Inc.", "subsidiaries": ["网易游戏", "网易云音乐"] },
+    { "value": "携程", "label": "携程", "aliases": ["携程旅行", "Trip.com"], "englishName": "Trip.com Group Limited", "subsidiaries": ["携程旅行", "携程酒店"] },
+    { "value": "哔哩哔哩", "label": "哔哩哔哩", "aliases": ["B站", "bilibili", "小破站"], "englishName": "Bilibili Inc.", "subsidiaries": ["哔哩哔哩", "Bilibili Comics"] },
+    { "value": "京东方", "label": "京东方", "aliases": ["BOE"], "englishName": "BOE Technology Group Co., Ltd.", "subsidiaries": ["京东方显示", "京东方科技"] },
+    { "value": "小红书", "label": "小红书", "aliases": ["RED", "XHS"], "englishName": "Xiaohongshu Inc.", "subsidiaries": ["小红书", "小红书商城"] },
+    { "value": "商汤科技", "label": "商汤科技", "aliases": ["商汤", "SenseTime"], "englishName": "SenseTime Group Limited", "subsidiaries": ["商汤科技", "商汤智能"] },
+    { "value": "蔚来", "label": "蔚来", "aliases": ["NIO", "蔚来汽车"], "englishName": "NIO Inc.", "subsidiaries": ["蔚来汽车", "蔚来能源"] },
+    { "value": "理想汽车", "label": "理想汽车", "aliases": ["理想", "LI"], "englishName": "Li Auto Inc.", "subsidiaries": ["理想汽车", "理想能源"] },
+    { "value": "小鹏汽车", "label": "小鹏汽车", "aliases": ["小鹏", "XPENG"], "englishName": "XPeng Inc.", "subsidiaries": ["小鹏汽车", "小鹏能源"] }
+  ],
+  "smallCompanies": [
+    { "value": "得物", "label": "得物", "aliases": ["毒", "DEWU", "毒App"], "englishName": "Dewu Inc.", "subsidiaries": ["得物", "毒App"] },
+    { "value": "知乎", "label": "知乎", "aliases": ["知乎日报"], "englishName": "Zhihu Inc.", "subsidiaries": ["知乎", "知乎日报"] },
+    { "value": "贝壳", "label": "贝壳", "aliases": ["贝壳找房", "链家"], "englishName": "KE Holdings Inc.", "subsidiaries": ["贝壳找房", "链家"] },
+    { "value": "瓜子二手车", "label": "瓜子二手车", "aliases": ["瓜子", "毛豆新车"], "englishName": "Guazi Inc.", "subsidiaries": ["瓜子二手车", "毛豆新车"] },
+    { "value": "完美世界", "label": "完美世界", "aliases": ["完美", "Perfect World"], "englishName": "Perfect World Co., Ltd.", "subsidiaries": ["完美世界", "完美游戏"] },
+    { "value": "金山", "label": "金山", "aliases": ["金山软件", "WPS"], "englishName": "Kingsoft Corporation Limited", "subsidiaries": ["金山软件", "WPS"] },
+    { "value": "58同城", "label": "58同城", "aliases": ["58", "赶集网"], "englishName": "58.com Inc.", "subsidiaries": ["58同城", "赶集网"] },
+    { "value": "搜狐", "label": "搜狐", "aliases": ["搜狐视频", "搜狐新闻"], "englishName": "Sohu.com Limited", "subsidiaries": ["搜狐视频", "搜狐新闻"] },
+    { "value": "虎牙", "label": "虎牙", "aliases": ["虎牙直播", "HUYA"], "englishName": "HUYA Inc.", "subsidiaries": ["虎牙直播", "HUYA"] },
+    { "value": "斗鱼", "label": "斗鱼", "aliases": ["斗鱼直播", "DOUYU"], "englishName": "DouYu International Holdings Limited", "subsidiaries": ["斗鱼直播", "DOUYU"] },
+    { "value": "BOSS直聘", "label": "BOSS直聘", "aliases": ["直聘", "BOSS"], "englishName": "BOSS Zhipin Inc.", "subsidiaries": ["BOSS直聘", "直聘"] },
+    { "value": "猿辅导", "label": "猿辅导", "aliases": ["猿题库"], "englishName": "Yuanfudao Inc.", "subsidiaries": ["猿辅导", "猿题库"] },
+    { "value": "作业帮", "label": "作业帮", "aliases": ["作业帮直播课"], "englishName": "Zuoyebang Inc.", "subsidiaries": ["作业帮", "作业帮直播课"] },
+    { "value": "Keep", "label": "Keep", "aliases": ["keep运动"], "englishName": "Keep Inc.", "subsidiaries": ["Keep", "keep运动"] },
+    { "value": "叮咚买菜", "label": "叮咚买菜", "aliases": ["叮咚"], "englishName": "Dingdong Maicai Inc.", "subsidiaries": ["叮咚买菜", "叮咚"] }
+  ]
+}
