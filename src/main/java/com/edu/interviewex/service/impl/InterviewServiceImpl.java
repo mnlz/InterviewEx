@@ -3,6 +3,8 @@ package com.edu.interviewex.service.impl;
 import com.edu.interviewex.dao.InterviewDao;
 import com.edu.interviewex.entity.Interview;
 import com.edu.interviewex.service.InterviewService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -55,40 +57,41 @@ public class InterviewServiceImpl implements InterviewService {
      */
     @Override
     public Page<Interview> searchByCompany(String companyKeyword, Pageable pageable) {
-        // 计算分页参数
-        int offset = pageable.getPageNumber() * pageable.getPageSize();
-        int limit = pageable.getPageSize();
-        
         // 处理搜索关键字
         List<String> keywords = null;
         if (companyKeyword != null && !companyKeyword.trim().isEmpty()) {
             keywords = Arrays.asList(companyKeyword.split(","));
         }
         
-        // 获取总记录数
-        int total = interviewDao.countByCompany(keywords);
+        // 使用PageHelper进行分页
+        PageHelper.startPage(pageable.getPageNumber() + 1, pageable.getPageSize());
+        List<Interview> interviews = interviewDao.searchByCompanyWithPage(keywords);
         
-        // 获取当前页数据
-        List<Interview> interviews = interviewDao.searchByCompanyWithPage(keywords, offset, limit);
+        // 获取分页信息
+        PageInfo<Interview> pageInfo = new PageInfo<>(interviews);
         
         // 返回分页结果
-        return new PageImpl<>(interviews, pageable, total);
+        return new PageImpl<>(
+            pageInfo.getList(),
+            pageable,
+            pageInfo.getTotal()
+        );
     }
 
     @Override
     public Page<Interview> advancedSearch(String title, String company, Pageable pageable) {
-        // 调用DAO层的高级搜索方法
+        // 使用PageHelper进行分页
+        PageHelper.startPage(pageable.getPageNumber() + 1, pageable.getPageSize());
         List<Interview> interviews = interviewDao.advancedSearch(title, company);
         
-        // 手动进行分页
-        int start = (int) pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), interviews.size());
+        // 获取分页信息
+        PageInfo<Interview> pageInfo = new PageInfo<>(interviews);
         
-        // 返回分页结果
-        return new PageImpl<>
-            (interviews.subList(start, end),
+        // 转换为Spring Data的Page对象
+        return new PageImpl<>(
+            pageInfo.getList(),
             pageable,
-            interviews.size()
-            );
+            pageInfo.getTotal()
+        );
     }
 }

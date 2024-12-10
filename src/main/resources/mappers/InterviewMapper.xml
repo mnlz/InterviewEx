@@ -47,9 +47,16 @@
     <!-- 分页查询 -->
     <select id="searchByCompanyWithPage" resultMap="InterviewResultMap">
         SELECT * FROM niuke
-        <include refid="companySearchCondition"/>
+        <where>
+            <if test="keywords != null and keywords.size() > 0">
+                AND (
+                <foreach collection="keywords" item="keyword" separator=" OR ">
+                    company LIKE CONCAT('%', #{keyword}, '%')
+                </foreach>
+                )
+            </if>
+        </where>
         ORDER BY edit_time DESC
-        LIMIT #{offset}, #{limit}
     </select>
 
     <update id="update" parameterType="com.edu.interviewex.entity.Interview">
@@ -64,7 +71,7 @@
     </delete>
 
 
-        <!-- 高级搜索条件 -->
+    <!-- 高级搜索条件 -->
     <sql id="advancedSearchCondition">
         <where>
             <if test="title != null and title != ''">
@@ -79,9 +86,15 @@
     <!-- 高级搜索分页查询 -->
     <select id="advancedSearch" resultMap="InterviewResultMap">
         SELECT * FROM niuke
-        <include refid="advancedSearchCondition"/>
+        <where>
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="company != null and company != ''">
+                AND company LIKE CONCAT('%', #{company}, '%')
+            </if>
+        </where>
         ORDER BY edit_time DESC
-        LIMIT #{offset}, #{limit}
     </select>
 
     <!-- 统计高级搜索结果总数 -->

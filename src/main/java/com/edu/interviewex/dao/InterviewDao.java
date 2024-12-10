@@ -16,7 +16,7 @@ public interface InterviewDao {
     int update(Interview interview);
 
     int deleteById(Long id);
-    
+
     /**
      * Search interviews by company keywords
      * @param companyKeywords list of company keywords for fuzzy search
@@ -27,13 +27,9 @@ public interface InterviewDao {
     /**
      * Search interviews by company keywords
      * @param keywords list of company keywords to search for
-     * @param offset pagination offset
-     * @param limit pagination limit
      * @return list of matching interviews
      */
-    List<Interview> searchByCompanyWithPage(@Param("keywords") List<String> keywords,
-                                          @Param("offset") int offset,
-                                          @Param("limit") int limit);
+    List<Interview> searchByCompanyWithPage(@Param("keywords") List<String> keywords);
 
     /**
      * Count total number of interviews matching company keywords
@@ -43,10 +39,11 @@ public interface InterviewDao {
     int countByCompany(@Param("keywords") List<String> keywords);
 
     /**
-     * 高级搜索：支持标题和公司名称搜索
+     * 高级搜索
      * @param title 标题关键字
      * @param company 公司关键字
-     * @return 匹配的面试题列表
+     * @return 面试题列表
      */
-    List<Interview> advancedSearch(@Param("title") String title, @Param("company") String company);
+    List<Interview> advancedSearch(@Param("title") String title, 
+                                 @Param("company") String company);
 }

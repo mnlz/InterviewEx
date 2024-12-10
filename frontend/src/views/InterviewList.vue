@@ -166,6 +166,13 @@ export default {
     async searchInterviews() {
       this.loading = true;
       try {
+        console.log('Search params:', {
+          title: this.searchTitle,
+          company: this.searchCompany,
+          page: this.currentPage - 1,
+          size: this.pageSize
+        });
+
         const response = await this.$axios.get('/api/interviews/advanced-search', {
           params: {
             title: this.searchTitle || undefined,
@@ -175,12 +182,29 @@ export default {
           }
         });
         
-        // 更新数据
-        this.interviews = response.data.content;
-        this.total = response.data.totalElements;
+        console.log('API Response:', response.data);
+        
+        if (response.data && Array.isArray(response.data.content)) {
+          this.interviews = response.data.content.map(item => ({
+            ...item,
+            content: item.content || '暂无内容',
+            company: item.company || '未知公司',
+            title: item.title || '未知标题',
+            editTime: item.editTime || new Date().toISOString()
+          }));
+          this.total = response.data.totalElements || 0;
+          console.log('Processed interviews:', this.interviews);
+        } else {
+          console.error('Invalid response format:', response.data);
+          this.$message.warning('返回数据格式不正确');
+          this.interviews = [];
+          this.total = 0;
+        }
       } catch (error) {
         console.error('Failed to fetch interviews:', error);
-        this.$message.error('获取面试列表失败');
+        this.$message.error(error.response?.data?.message || '获取面试列表失败');
+        this.interviews = [];
+        this.total = 0;
       } finally {
         this.loading = false;
       }
