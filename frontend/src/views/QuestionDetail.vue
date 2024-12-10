@@ -131,7 +131,7 @@ export default {
         const response = await fetch('https://api.coze.cn/v3/chat', {
           method: 'POST',
           headers: {
-            'Authorization': 'Bearer pat_M0rCjWG2Ntmd6m2YrOsELRp1gwfPQCQjNObfJq4yg6d9PBp0ZgIHU7hxmKryCCCc',
+            'Authorization': '',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
